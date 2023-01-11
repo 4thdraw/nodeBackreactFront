@@ -1,26 +1,35 @@
 import React, {useEffect, useState } from 'react';
 import axios from 'axios';
 
-// axios를 사용해서 GET, PUT, POST, DELETE 등의 메서드로 API 요청이 가능합니다. 
-// GET: 데이터 조회
-// POST: 데이터 등록
-// PUT: 데이터 수정
-// DELETE: 데이터 제거
 function Contact(props) { 
-    const [nodeData, dataUpdate] = useState('초기값');
+    const [nodeData, dataUpdate] = useState({});
     
     useEffect(() => {
         axios
-          .get("http://localhost:8080/reactProxy")
-          .then((response) => {
-            dataUpdate(response.data.title);
+          .get("http://localhost:8080/reactProxy/list")
+          .then((response) => {           
+            const noticeDb ={...response.data};            
+            dataUpdate(noticeDb);
+            console.log(noticeDb, typeof noticeDb);
           });
-      }, [nodeData]);
-
+      }, []); //반드시 한번만 하도록 한다... 랜더링지옥에 빠지게된다.
     
     return (
         <div>
-            {nodeData}
+            {
+              nodeData.notice.map((item, index)=>{
+                return(
+                  <li key={'notice'+index} >
+                    <p>
+                      {item.subject}
+                    </p>
+                    <div>
+                      {item.content}
+                    </div>
+                  </li>
+                )
+              })
+            }
         </div>
     );
 }
