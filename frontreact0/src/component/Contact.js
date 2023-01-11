@@ -8,9 +8,9 @@ function Contact(props) {
         axios
           .get("http://localhost:8080/reactProxy/list")
           .then((response) => {           
-            const noticeDb ={...response.data};            
-            dataUpdate(noticeDb);
-            console.log(noticeDb, typeof noticeDb);
+              const noticeDb ={...response.data};            
+              dataUpdate(noticeDb);
+           console.log(noticeDb, typeof noticeDb);
           });
       }, []); //반드시 한번만 하도록 한다... 랜더링지옥에 빠지게된다.
     

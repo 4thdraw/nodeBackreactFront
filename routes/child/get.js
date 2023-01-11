@@ -1,4 +1,5 @@
 var express = require('express');
+const noticejson = require('../../json/notice')
 var router = express.Router();
 
 /* GET home page. 
@@ -7,21 +8,8 @@ var router = express.Router();
   localhost:8080/reactProxy/list
 */
 router.get('/', (req, res) => {
-    res.send({
-            notice :[ {
-                subject : "공지사항0",
-                content : "글에 대한 제목입니다."
-            },
-            {
-                subject : "공지사항1",
-                content : "글에 대한 제목입니다."
-            },
-            {
-                subject : "공지사항2",
-                content : "글에 대한 제목입니다."
-            }
-        ]
-    })
+    console.log(noticejson, typeof noticejson);
+    res.send(noticejson)
 });
 
 
