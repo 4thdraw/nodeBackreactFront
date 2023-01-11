@@ -1,19 +1,17 @@
 var express = require('express');
 var router = express.Router();
 
+const writejs = require('./child/post');
+const listjs = require('./child/get');
+
 /* GET home page. 
+  리액트 접근 주소
   localhost:8080/reactProxy
+  localhost:8080/reactProxy/write
+  localhost:8080/reactProxy/list
 */
 
-/*
-  프론트앤드 리액트에서 $.ajax({ url : "localhost:8080/contact", type :"POST" })
-
-*/
-router.get('/', function(req, res, next) {
-  res.send({ title: 'Get요청에 응답하는 노드서버' });
-});
-router.post('/', function(req, res, next) {
-    res.send({ title: 'Express' });
-});
+router.use('/list', listjs);
+router.use('/write', writejs);
 
 module.exports = router;
